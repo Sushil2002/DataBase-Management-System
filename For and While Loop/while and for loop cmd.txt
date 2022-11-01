@@ -1,0 +1,355 @@
+
+mysql> call A(5);
+    -> //
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 79             |
++-----------------------------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> create procedure find()
+    -> begin
+    -> delcare st int;
+    -> set st=3;
+    -> while st<9 do
+    ->  call A(st);
+    -> st:=st+1;
+    -> end while;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'st int;
+set st=3;
+while st<9 do
+ call A(st);
+st:=st+1;
+end while' at line 3
+mysql> create procedure find()
+    -> begin
+    -> delcare st int;
+    -> set st=3;
+    -> while st<9 do
+    ->  call A(st);
+    -> st:=st+1;
+    -> end while;
+    -> end;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'st int;
+set st=3;
+while st<9 do
+ call A(st);
+st:=st+1;
+end while;
+end' at line 3
+mysql>
+mysql> create procedure find()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> while st<9 do
+    ->  call A(st);
+    -> st:=st+1;
+    -> end while;
+    -> end;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':=st+1;
+end while;
+end' at line 7
+mysql> create procedure find()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> while st<9 do
+    ->  call A(st);
+    -> st=st+1;
+    -> end while;
+    -> end;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=st+1;
+end while;
+end' at line 7
+mysql> create procedure find()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> while st<9 do
+    ->  call A(st);
+    -> set st=st+1;
+    -> end while;
+    -> end;
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call find();//
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 28             |
++-----------------------------+
+1 row in set (0.00 sec)
+
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 50             |
++-----------------------------+
+1 row in set (0.01 sec)
+
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 79             |
++-----------------------------+
+1 row in set (0.02 sec)
+
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 113            |
++-----------------------------+
+1 row in set (0.03 sec)
+
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 154            |
++-----------------------------+
+1 row in set (0.05 sec)
+
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 201            |
++-----------------------------+
+1 row in set (0.05 sec)
+
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> create procedure find1()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> label : LOOP
+    -> if st = 9 then
+    -> leave label
+    -> end if
+    -> call A(st)
+    -> set st=st+1
+    -> iterate LOOP - label
+    -> end;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end if
+call A(st)
+set st=st+1
+iterate LOOP - label
+end' at line 8
+mysql>
+mysql> create procedure find1()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> label : LOOP
+    -> call A(st)
+    -> set st=st+1
+    -> if st = 9 then
+    -> leave label
+    -> end if
+    ->
+    -> iterate LOOP - label
+    -> end;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'set st=st+1
+if st = 9 then
+leave label
+end if
+
+iterate LOOP - label
+end' at line 7
+mysql> create procedure find1()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> label : LOOP
+    -> call A(st)
+    -> set st=st+1
+    -> if st > 8  then
+    -> leave label
+    -> end if
+    -> iterate LOOP - label
+    -> end;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'set st=st+1
+if st > 8  then
+leave label
+end if
+iterate LOOP - label
+end' at line 7
+mysql> create procedure find1()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> label : LOOP
+    -> call A(st)
+    -> set st=st+1
+    -> if st > 8  then
+    -> leave label
+    -> end if
+    -> iterate LOOP - label
+    -> end LOOP
+    -> end;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'set st=st+1
+if st > 8  then
+leave label
+end if
+iterate LOOP - label
+end LOOP
+en' at line 7
+mysql>
+mysql> create procedure find1()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> set st=st+1
+    -> if st > 8  then
+    -> leave label
+    -> end if
+    -> label : LOOP
+    -> call A(st)
+    -> iterate label
+    -> end LOOP
+    -> end;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'if st > 8  then
+leave label
+end if
+label : LOOP
+call A(st)
+iterate label
+end LO' at line 6
+mysql> create procedure find1()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> label : LOOP
+    -> if st > 8  then
+    -> leave label
+    -> end if;
+    -> call A(st)
+    -> set st=st+1
+    -> iterate label
+    -> end LOOP
+    -> end;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'end if;
+call A(st)
+set st=st+1
+iterate label
+end LOOP
+end' at line 8
+mysql> create procedure find1()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> label : LOOP
+    -> if st > 8  then
+    -> leave label
+    -> endif;
+    -> call A(st)
+    -> set st=st+1
+    -> iterate label
+    -> end LOOP
+    -> end;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'endif;
+call A(st)
+set st=st+1
+iterate label
+end LOOP
+end' at line 8
+mysql> create procedure find1()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> label : LOOP
+    -> if st > 8  then
+    -> leave label;
+    -> end if;
+    -> call A(st)
+    -> set st=st+1
+    -> iterate label
+    -> end LOOP
+    -> end;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'set st=st+1
+iterate label
+end LOOP
+end' at line 10
+mysql> //
+ERROR:
+No query specified
+
+mysql>
+mysql> create procedure find1()
+    -> begin
+    -> declare st int;
+    -> set st=3;
+    -> label : LOOP
+    -> if st > 8  then
+    -> leave label;
+    -> end if;
+    -> call A(st);
+    -> set st=st+1;
+    -> iterate label;
+    -> end LOOP;
+    -> end;
+    -> //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> call find1();
+    -> //
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 28             |
++-----------------------------+
+1 row in set (0.00 sec)
+
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 50             |
++-----------------------------+
+1 row in set (0.01 sec)
+
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 79             |
++-----------------------------+
+1 row in set (0.01 sec)
+
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 113            |
++-----------------------------+
+1 row in set (0.02 sec)
+
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 154            |
++-----------------------------+
+1 row in set (0.03 sec)
+
++-----------------------------+
+| concat('Riya Area is ', Ar) |
++-----------------------------+
+| Riya Area is 201            |
++-----------------------------+
+1 row in set (0.05 sec)
+
+Query OK, 0 rows affected (0.07 sec)

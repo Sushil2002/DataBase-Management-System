@@ -1,0 +1,194 @@
+
+mysql>
+mysql> create table Employee(emp_id int,dept_id int,fname varchar(25),lname varchar(25),degination varchar(25),salary int,join_date date,FOREIGN KEY(dept_id) REFERENCES Dept(dept_id),PRIMARY KEY(emp_id));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql>
+mysql> create table Project (proj_id int primary key,dept_id int,pname varchar (25),plocation varchar(25),pcost int,pyear int,foreign key(dept_id) references Dept(dept_id));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql>
+mysql> insert into Dept values(1,'Computer','Pune');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Dept values(2,'IT','Pune');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Dept values(3,'Computer','Thane');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Dept values(4,'IT','Thane');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Dept values(5,'ENTC','Nashik');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Dept values(6,'ENTC','Nashik');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> insert into Employee values(1,1,'Sushil','Dhamane','Intern',10000,'2021-07-26');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(2,6,'Krushna','Pulate','Team Lead',15000,'2020-05-14');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(3,2,'Akshay','Patil','Project Manager',15000,'2018-06-27');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(4,4,'Swayam','Boob','Developer',10000,'2012-07-20');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(5,5,'Vaibhav','Nanne','Marketing Head',140000,'2014-01-24');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(6,3,'Akshay','Jhadhav','CEO',100000,'2015-03-02');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(7,1,'Gaurav','Sable','Team Lead',1046000,'2011-06-25');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(8,1,'Gaurav','Gnagunrade','Developer',145600,'2014-07-12');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(9,2,'Manadar','Narkhade','CTO',145410,'2010-04-21');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(10,3,'Manish','Bhamre','Team Lead',14410,'2009-07-17');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> insert into Project values(1,1,'ML','Pune',11005,2020);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into Project values(2,6,'Health Care','Mumbai',11455,2021);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Project values(3,1,'Management System','Pune',11405,2024);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Project values(4,3,'Chatbot','Delhi',14785,2015);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Project values(5,4,'Stock Market','Banglore',14774,2017);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Project values(6,2,'Clone App','Nashik',1423,2020);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from Employee natural join Dept where (Dept.dname='Computer' or Dept.dname='IT') and (emp_id in (select emp_id from Employee where fname like 'S%' or fname like 'G%'));
++---------+--------+--------+------------+------------+---------+------------+----------+-----------+
+| dept_id | emp_id | fname  | lname      | degination | salary  | join_date  | dname    | dlocation |
++---------+--------+--------+------------+------------+---------+------------+----------+-----------+
+|       1 |      1 | Sushil | Dhamane    | Intern     |   10000 | 2021-07-26 | Computer | Pune      |
+|       1 |      7 | Gaurav | Sable      | Team Lead  | 1046000 | 2011-06-25 | Computer | Pune      |
+|       1 |      8 | Gaurav | Gnagunrade | Developer  |  145600 | 2014-07-12 | Computer | Pune      |
+|       4 |      4 | Swayam | Boob       | Developer  |   10000 | 2012-07-20 | IT       | Thane     |
++---------+--------+--------+------------+------------+---------+------------+----------+-----------+
+4 rows in set (0.01 sec)
+
+mysql> select distinct degination from Employee;
++-----------------+
+| degination      |
++-----------------+
+| Intern          |
+| Team Lead       |
+| Project Manager |
+| Developer       |
+| Marketing Head  |
+| CEO             |
+| CTO             |
++-----------------+
+7 rows in set (0.02 sec)
+
+mysql> update Employee set salary=salary+salary*(10/100) where (YEAR(join_date)>2015);
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select *from Employee;
++--------+---------+---------+------------+-----------------+---------+------------+
+| emp_id | dept_id | fname   | lname      | degination      | salary  | join_date  |
++--------+---------+---------+------------+-----------------+---------+------------+
+|      1 |       1 | Sushil  | Dhamane    | Intern          |   11000 | 2021-07-26 |
+|      2 |       6 | Krushna | Pulate     | Team Lead       |   16500 | 2020-05-14 |
+|      3 |       2 | Akshay  | Patil      | Project Manager |   16500 | 2018-06-27 |
+|      4 |       4 | Swayam  | Boob       | Developer       |   10000 | 2012-07-20 |
+|      5 |       5 | Vaibhav | Nanne      | Marketing Head  |  140000 | 2014-01-24 |
+|      6 |       3 | Akshay  | Jhadhav    | CEO             |  100000 | 2015-03-02 |
+|      7 |       1 | Gaurav  | Sable      | Team Lead       | 1046000 | 2011-06-25 |
+|      8 |       1 | Gaurav  | Gnagunrade | Developer       |  145600 | 2014-07-12 |
+|      9 |       2 | Manadar | Narkhade   | CTO             |  145410 | 2010-04-21 |
+|     10 |       3 | Manish  | Bhamre     | Team Lead       |   14410 | 2009-07-17 |
++--------+---------+---------+------------+-----------------+---------+------------+
+10 rows in set (0.00 sec)
+
+mysql> delete from dept where dlocation='Mumbai';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from dept;
++---------+----------+-----------+
+| dept_id | dname    | dlocation |
++---------+----------+-----------+
+|       1 | Computer | Pune      |
+|       2 | IT       | Pune      |
+|       3 | Computer | Thane     |
+|       4 | IT       | Thane     |
+|       5 | ENTC     | Nashik    |
+|       6 | ENTC     | Nashik    |
++---------+----------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select pname from Project where plocation='Pune';
++-------------------+
+| pname             |
++-------------------+
+| ML                |
+| Management System |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> select *from Project where pcost>10000 and pcost<14000;
++---------+---------+-------------------+-----------+-------+-------+
+| proj_id | dept_id | pname             | plocation | pcost | pyear |
++---------+---------+-------------------+-----------+-------+-------+
+|       1 |       1 | ML                | Pune      | 11005 |  2020 |
+|       2 |       6 | Health Care       | Mumbai    | 11455 |  2021 |
+|       3 |       1 | Management System | Pune      | 11405 |  2024 |
++---------+---------+-------------------+-----------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select *from Project where pcost=(select max(pcost) from Project);
++---------+---------+---------+-----------+-------+-------+
+| proj_id | dept_id | pname   | plocation | pcost | pyear |
++---------+---------+---------+-----------+-------+-------+
+|       4 |       3 | Chatbot | Delhi     | 14785 |  2015 |
++---------+---------+---------+-----------+-------+-------+
+1 row in set (0.01 sec)
+
+mysql> select *from Employee order by fname desc;
++--------+---------+---------+------------+-----------------+---------+------------+
+| emp_id | dept_id | fname   | lname      | degination      | salary  | join_date  |
++--------+---------+---------+------------+-----------------+---------+------------+
+|      5 |       5 | Vaibhav | Nanne      | Marketing Head  |  140000 | 2014-01-24 |
+|      4 |       4 | Swayam  | Boob       | Developer       |   10000 | 2012-07-20 |
+|      1 |       1 | Sushil  | Dhamane    | Intern          |   11000 | 2021-07-26 |
+|     10 |       3 | Manish  | Bhamre     | Team Lead       |   14410 | 2009-07-17 |
+|      9 |       2 | Manadar | Narkhade   | CTO             |  145410 | 2010-04-21 |
+|      2 |       6 | Krushna | Pulate     | Team Lead       |   16500 | 2020-05-14 |
+|      7 |       1 | Gaurav  | Sable      | Team Lead       | 1046000 | 2011-06-25 |
+|      8 |       1 | Gaurav  | Gnagunrade | Developer       |  145600 | 2014-07-12 |
+|      3 |       2 | Akshay  | Patil      | Project Manager |   16500 | 2018-06-27 |
+|      6 |       3 | Akshay  | Jhadhav    | CEO             |  100000 | 2015-03-02 |
++--------+---------+---------+------------+-----------------+---------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select pname,plocation,pcost from Project where pyear=2020;
++-----------+-----------+-------+
+| pname     | plocation | pcost |
++-----------+-----------+-------+
+| ML        | Pune      | 11005 |
+| Clone App | Nashik    |  1423 |
++-----------+-----------+-------+
+2 rows in set (0.00 sec)
+
+mysql>

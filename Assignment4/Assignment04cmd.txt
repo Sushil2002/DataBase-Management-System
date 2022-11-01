@@ -1,0 +1,89 @@
+mysql> delimiter //
+mysql> create procedure solve(IN rollno int,IN name varchar(25),IN doi date,IN bookname varchar(25),IN status varchar(25))
+    -> insert into Borrower values(rollno,name,doi,bookname,status);
+    -> end;
+    -> //
+Query OK, 0 rows affected (0.05 sec)
+
+call solve(1,'Anurag','2021-05-29','DBMS','I');//
+call solve(2,'Ayush','2022-06-29','TOC','I');//
+call solve(3,'Sayeed','2022-07-15','SPOS','I');//
+call solve(4,'Darshan','2022-08-20','CNS','I');//
+call solve(5,'Viraj','2022-07-02','DSA','I');//
+
+
+mysql> CREATE PROCEDURE calculate_fine (IN rollno INT, IN name VARCHAR(20))
+    -> BEGIN
+    -> DECLARE fine INT;
+    -> DECLARE date_of_issue INT;
+    -> DECLARE days INT;
+    -> SELECT doi into date_of_issue from Borrower where Borrower.rollno=rollno and Borrower.bookName=name;
+    -> SET days = DATEDIFF(CURDATE(), date_of_issue);
+    ->
+    -> IF (days>=15 AND days<=30) THEN
+    ->     SET fine=days*5;
+    -> ELSEIF (days>30) THEN
+    ->     SET fine=(days-30)*50+150;
+    -> END IF;
+    ->
+    -> UPDATE Borrower SET status='R' where Borrower.rollno=rollno and Borrower.bookName=name;
+    ->
+    -> IF(fine is not null) THEN
+    ->     INSERT INTO Fine VALUES(rollno, CURDATE(), fine);
+    -> END IF;
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+
+
+
+mysql> select *from Borrower;
+    -> //
++--------+---------+------------+----------+--------+
+| RollNo | Name    | DOI        | BookName | Status |
++--------+---------+------------+----------+--------+
+|      1 | Anurag  | 2021-05-29 | DBMS     | I      |
+|      2 | Ayush   | 2022-06-29 | TOC      | I      |
+|      3 | Sayeed  | 2022-07-15 | SPOS     | I      |
+|      4 | Darshan | 2022-08-20 | CNS      | I      |
+|      5 | Viraj   | 2022-07-02 | DSA      | I      |
++--------+---------+------------+----------+--------+
+5 rows in set (0.00 sec)
+
+
+
+mysql> call calculate(1,'CNS');//
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from Fine//
+Empty set (0.00 sec)
+
+mysql> call calculate(4,'CNS');//
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from Fine//
+Empty set (0.00 sec)
+
+mysql> call calculate(1,'DBMS');//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from Fine//
++--------+------------+-------+
+| RollNo | Date       | Amt   |
++--------+------------+-------+
+|      1 | 2022-08-23 | 21200 |
++--------+------------+-------+
+1 row in set (0.00 sec)
+
+mysql> call calculate(2,'TOC');//
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from Fine//
++--------+------------+-------+
+| RollNo | Date       | Amt   |
++--------+------------+-------+
+|      1 | 2022-08-23 | 21200 |
+|      2 | 2022-08-23 |  1400 |
++--------+------------+-------+
+2 rows in set (0.00 sec)
+

@@ -1,0 +1,196 @@
+
+mysql> delimiter //
+mysql>
+mysql> CREATE TABLE Student(Name varchar(25),Totalmarks int);//
+Query OK, 0 rows affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO Student VALUES('A',1390);//
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Student VALUES('B',1500);//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Student VALUES('C',924);//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Student VALUES('D',821);//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Student VALUES('E',542);//
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> CREATE TABLE Result(RollNo int,Name varchar(25),Class varchar(25));//
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> INSERT INTO Result VALUES(1,'A','NULL');//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Result VALUES(2,'B','NULL');//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Result VALUES(3,'C','NULL');//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Result VALUES(4,'D','NULL');//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Result VALUES(5,'E','NULL');//
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql>
+mysql> CREATE FUNCTION Grade(roll int)
+    -> RETURNS varchar(25)
+    -> DETERMINISTIC
+    -> BEGIN
+    -> DECLARE GRADE varchar(25);
+    -> DECLARE marks1 int;
+    -> SELECT Totalmarks INTO marks1 FROM Student as s,Result as r where s.Name=r.Name and roll=r.RollNo;
+    -> IF(marks1<=1500 and marks1>=990) THEN
+    -> UPDATE Result SET Class='Distinction' WHERE Result.RollNo=roll;
+    -> SET GRADE='Distinction';
+    -> ELSEIF( marks1>=900 and marks1<=989) THEN
+    -> UPDATE Result SET Class='Frist Class' WHERE Result.RollNo=roll;
+    -> SET GRADE='First Class';
+    -> ELSEIF(marks1>=825 AND marks1<=899) THEN
+    -> UPDATE Result SET Class='Higher Second Class' WHERE Result.RollNo=roll;
+    -> SET GRADE='Higher Second Class';
+    -> ELSE
+    -> UPDATE Result SET Class='Fail' WHERE Result.RollNo=roll;
+    -> SET GRADE='Fail';
+    -> END IF;
+    -> return GRADE;
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select *from Student;
+    -> //
++------+------------+
+| Name | Totalmarks |
++------+------------+
+| A    |       1390 |
+| B    |       1500 |
+| C    |        924 |
+| D    |        821 |
+| E    |        542 |
++------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select *from Result;//
++--------+------+-------+
+| RollNo | Name | Class |
++--------+------+-------+
+|      1 | A    | NULL  |
+|      2 | B    | NULL  |
+|      3 | C    | NULL  |
+|      4 | D    | NULL  |
+|      5 | E    | NULL  |
++--------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> call Grade(1);
+    -> //
+ERROR 1305 (42000): PROCEDURE te31123db.Grade does not exist
+mysql> select Grade(1);//
++-------------+
+| Grade(1)    |
++-------------+
+| Distinction |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select *from Result;//
++--------+------+-------------+
+| RollNo | Name | Class       |
++--------+------+-------------+
+|      1 | A    | Distinction |
+|      2 | B    | NULL        |
+|      3 | C    | NULL        |
+|      4 | D    | NULL        |
+|      5 | E    | NULL        |
++--------+------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select Grade(5);//
++----------+
+| Grade(5) |
++----------+
+| Fail     |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select *from Result;//
++--------+------+-------------+
+| RollNo | Name | Class       |
++--------+------+-------------+
+|      1 | A    | Distinction |
+|      2 | B    | NULL        |
+|      3 | C    | NULL        |
+|      4 | D    | NULL        |
+|      5 | E    | Fail        |
++--------+------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select Grade(3);//
++-------------+
+| Grade(3)    |
++-------------+
+| First Class |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select *from Result;//
++--------+------+-------------+
+| RollNo | Name | Class       |
++--------+------+-------------+
+|      1 | A    | Distinction |
+|      2 | B    | NULL        |
+|      3 | C    | Frist Class |
+|      4 | D    | NULL        |
+|      5 | E    | Fail        |
++--------+------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select Grade(2);//
++-------------+
+| Grade(2)    |
++-------------+
+| Distinction |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select *from Result;//
++--------+------+-------------+
+| RollNo | Name | Class       |
++--------+------+-------------+
+|      1 | A    | Distinction |
+|      2 | B    | Distinction |
+|      3 | C    | Frist Class |
+|      4 | D    | NULL        |
+|      5 | E    | Fail        |
++--------+------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select Grade(4);//
++----------+
+| Grade(4) |
++----------+
+| Fail     |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select *from Result;//
++--------+------+-------------+
+| RollNo | Name | Class       |
++--------+------+-------------+
+|      1 | A    | Distinction |
+|      2 | B    | Distinction |
+|      3 | C    | Frist Class |
+|      4 | D    | Fail        |
+|      5 | E    | Fail        |
++--------+------+-------------+
+5 rows in set (0.00 sec)

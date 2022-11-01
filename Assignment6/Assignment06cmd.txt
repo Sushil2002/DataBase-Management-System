@@ -1,0 +1,98 @@
+mysql> CREATE TABLE O_ROLLCALL(Name VARCHAR(25),RollNo INT,Class VARCHAR(25));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> 
+mysql> DELIMITER //
+mysql> 
+mysql> CREATE PROCEDURE SOLVE(IN name VARCHAR(25),IN rollno INT ,IN class VARCHAR(25))
+    -> BEGIN
+    -> INSERT INTO O_ROLLCALL VALUES(name,rollno,class);
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> 
+mysql> INSERT INTO O_ROLLCALL VALUES('SAYEED',31144,'TE1');//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO O_ROLLCALL VALUES('SANKET',45638,'TE4');//
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO O_ROLLCALL VALUES('VINAYAK',64528,'TE1');//
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO O_ROLLCALL VALUES('HARSH',41526,'TE3');//
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO O_ROLLCALL VALUES('SHREYASH',41297,'TE4');// 
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from O_ROLLCALL;
+    -> //
++----------+--------+-------+
+| Name     | RollNo | Class |
++----------+--------+-------+
+| SAYEED   |  31144 | TE1   |
+| SANKET   |  45638 | TE4   |
+| VINAYAK  |  64528 | TE1   |
+| HARSH    |  41526 | TE3   |
+| SHREYASH |  41297 | TE4   |
++----------+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE N_ROLLCALL(Name varchar(25),Rollno int,Class varchar(25));//
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select *from O_ROLLCALL;
+    -> //
++----------+--------+-------+
+| Name     | RollNo | Class |
++----------+--------+-------+
+| SAYEED   |  31144 | TE1   |
+| SANKET   |  45638 | TE4   |
+| VINAYAK  |  64528 | TE1   |
+| HARSH    |  41526 | TE3   |
+| SHREYASH |  41297 | TE4   |
++----------+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select *from N_ROLLCALL;//
+Empty set (0.00 sec)
+
+mysql> 
+mysql> CREATE PROCEDURE CUR()
+    -> BEGIN
+    -> DECLARE rollno INT;
+    -> DECLARE exit_loop BOOLEAN;
+    -> DECLARE c1 CURSOR FOR SELECT O_ROLLCALL.RollNo FROM O_ROLLCALL;
+    -> DECLARE CONTINUE HANDLER FOR NOT FOUND SET exit_loop=TRUE;
+    -> OPEN c1;
+    -> emp_loop:LOOP
+    -> FETCH c1 INTO rollno;
+    -> IF NOT EXISTS (SELECT *FROM N_ROLLCALL WHERE N_ROLLCALL.RollNo=rollno) THEN 
+    -> INSERT INTO N_ROLLCALL SELECT *FROM O_ROLLCALL WHERE O_ROLLCALL.RollNo=rollno;
+    -> END IF;
+    -> IF exit_loop THEN 
+    -> CLOSE c1;
+    -> LEAVE emp_loop;
+    -> END IF;
+    -> END LOOP emp_loop;
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call CUR();//
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> select *from N_ROLLCALL;//
++----------+--------+-------+
+| Name     | Rollno | Class |
++----------+--------+-------+
+| SAYEED   |  31144 | TE1   |
+| SANKET   |  45638 | TE4   |
+| VINAYAK  |  64528 | TE1   |
+| HARSH    |  41526 | TE3   |
+| SHREYASH |  41297 | TE4   |
++----------+--------+-------+
+5 rows in set (0.00 sec)
+
