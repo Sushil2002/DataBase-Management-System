@@ -1,0 +1,331 @@
+show dbs
+use t31123
+show dbs
+db.students.insert()
+
+db.students.insertOne({roll:1,name:'abc', marks:50})
+-- object id
+
+db.students.insertMany([{roll:1,name:'abc', marks:50}, {roll:2, name:'kalpesh'}])
+
+db.teachers.insert(
+    [
+        {
+            name:'Samruddhi Chauhan',
+            qualificaton:'PhD',
+            deptno:1,
+            deptname:'Comp',
+            experience:{
+                industry:5,
+                teaching:11
+            },
+            designation:'Teacher',
+            salary:{
+                basic:200000,
+                ta:20000,
+                da:40000,
+                hra:50000
+            },
+            date_of_joining:'20-10-2011',
+            area_of_expertise:'Cyber Security'
+        },
+        {
+            name:'Avishkar Kakade',
+            qualificaton:'PhD in Data Science',
+            deptno:2,
+            deptname:'IT',
+             experience:{
+                industry:5,
+                teaching:15
+            },
+            designation:'Teacher',
+            salary:{
+                basic:100000
+            },
+            date_of_joining:'01-11-2013',
+            area_of_expertise:'Data science'
+        },
+        {
+            name:'Vijay Ambure',
+            qualificaton:'B.E in Electronics Engg.',
+            deptno:3,
+            deptname:'EnTC',
+          experience:{
+                industry:5,
+                teaching:7
+            },
+            designation:'Professor',
+            salary:{
+                basic:400000,
+                ta:40000,
+                da:50000,
+            },
+            date_of_joining:'20-10-2007',
+            area_of_expertise:'Electromagnetics'
+        },
+        {
+            name:'Ashwini Jagtap',
+            deptno:1,
+            deptname:'Comp',
+             experience:{
+                industry:5,
+                teaching:6
+            },
+            designation:'Teacher',
+            salary:{
+                basic:100000,
+                hra:10000
+            },
+            date_of_joining:'20-10-2016',
+            area_of_expertise:'Machine Learning'
+        },
+        {
+            name:'Girish Potdar',
+            qualificaton:'PhD',
+            deptno:1,
+            deptname:'Comp',
+             experience:{
+                industry:5,
+                teaching:20
+            },
+            designation:'Professor',
+            salary:{
+                basic:900000,
+                ta:20000,
+                da:40000,
+                hra:50000
+            },
+            date_of_joining:'12-01-2002',
+            area_of_expertise:'Computational Complexity'
+        },
+        {
+            name:'Samruddhi Pulate',
+            deptno:3,
+            deptname:'EnTC',
+              experience:{
+                industry:10,
+                teaching:10
+            },
+            designation:'Teacher',
+            salary:{
+                basic:300000,
+                hra:30000
+            },
+            date_of_joining:'10-11-2012',
+            area_of_expertise:'Communication and Networks'
+        },
+        {
+            name:'Krushna Shewate',
+            deptno:3,
+            deptname:'EnTC',
+            experience:{
+                industry:8,
+                teaching:8
+            },
+            designation:'Teacher',
+            salary:{
+                basic:100000,
+            },
+            date_of_joining:'10-11-2018',
+            area_of_expertise:'Microcontroller'
+        },
+        {
+            name:'Rahul Chaudhary',
+            deptno:2,
+            deptname:'IT',
+           experience:{
+                industry:5,
+                teaching:8
+            },
+            designation:'Teacher',
+            salary:{
+                basic:70000,
+            },
+            date_of_joining:'10-11-2016',
+            area_of_expertise:'Database Management'
+        },
+        {
+            name:'Anup Kumar',
+            deptno:2,
+            deptname:'IT',
+          experience:{
+                industry:12,
+                teaching:8
+            },
+            designation:'Teacher',
+            salary:{
+                basic:40000,
+            },
+            date_of_joining:'01-04-2016',
+            area_of_expertise:'Machine Learning'
+        },
+        {
+            name:'Arvind Kumar',
+            deptno:1,
+            deptname:'Comp',
+             experience:{
+                industry:5,
+                teaching:15
+            },
+            designation:'Teacher',
+            salary:{
+                basic:90000,
+            },
+            date_of_joining:'01-04-2014',
+            area_of_expertise:'Arificial Intelligence'
+        },
+        {
+            name:'Arvind Sharma',
+            deptno:0,
+            deptname:'FE',
+             experience:{
+                industry:9,
+                teaching:5
+            },
+            designation:'Teacher',
+            salary:{
+                basic:60000,
+            },
+            date_of_joining:'01-04-2016',
+            area_of_expertise:'Engineering Graphics'
+        },
+        {
+            name:'Mohit Mohite',
+            deptno:0,
+            deptname:'FE',
+             experience:{
+                industry:5,
+                teaching:2
+            },
+            designation:'Teacher',
+            salary:{
+                basic:40000,
+            },
+            date_of_joining:'01-04-2020',
+            area_of_expertise:'Communication Skills'
+        }
+    ]
+)
+2.	Find the information about all teachers
+db.teachers.find().pretty()
+
+3.	Find the information about all teachers of computer department
+db.teachers.find(
+    {deptname:'Comp'}
+).pretty()
+
+4.	Find the information about all teachers of computer, IT & first year departments
+
+---db.inventory.find( { size: { h: 14, w: 21, uom: "cm" } } )
+Equality matches on the whole embedded document require an exact match of the specified <value> document, including the field order. 
+
+db.teachers.find(
+    {deptname: {$in: ['Comp', 'IT', 'FE']}}
+).pretty();
+
+5.	Find the information about all teachers of computer, IT and E&TC department having salary in between 70,000 and 1,00,000 (inclusive)
+
+db.teachers.find(
+    {
+        $and:
+        [
+            {deptname: {$in: ['Comp', 'IT', 'EnTC']}},
+          
+                {"salary.basic": {$gte : 70000,
+                $lte : 100000}}
+                
+            
+        ]
+    }
+).pretty();
+
+
+
+6.	Update the experience of any teacher to 10 years and if the entry is not available in database consider the entry as new entry (use update function only) 
+
+db.teachers.update(
+    {
+        name: "Rahul Chahar"
+    },
+    {
+        $set:{
+            "experience.teaching":10
+        }
+    },
+    {
+        upsert:true
+    }
+);
+db.teachers.find({name:"Rahul Chahar"}).pretty()
+
+db.teachers.update(
+{
+    name: "Ashwini Jagtap"
+},
+{
+    $set:{
+        "experience.teaching":10
+    }
+},
+{
+    upsert:true
+}
+);
+db.teachers.find({name:"Ashwini Jagtap"}).pretty();
+
+
+
+7.	Find the teachers name and experience & arrange in decreasing order of experience
+
+db.teachers.find(
+    {},
+    {
+        name:1,
+        experience:1
+    }
+).sort({ "experience.teaching": -1}).pretty();
+
+8.	Use save() method to insert one entry in teachers collection
+
+db.teachers.save(
+{
+    name:"Kalpana Tiwari", 
+    deptname:"Comp",
+     salary: 200000, 
+     experience:{
+        industry:5,
+        teaching :10
+     }
+}
+);
+
+9.	Use update() method to change the designation of teachers whose experience is 10 years or above to Professor
+
+db.teachers.find(
+    {
+        "experience.teaching" : {$lt: 10}
+    }
+).pretty()
+
+db.teachers.updateMany(
+    {"experience.teaching": {$gte: 10}},
+    {$set: {designation: "Professor"}}
+)
+
+ db.teachers.find({designation:"Professor"}).pretty();
+
+
+10.	Use save() method to change the designation of teachers to Professor.
+db.teachers.save(
+    {name:"Krushna Pulate", designation:"Professor"}
+)
+
+11.	Display with pretty() method, the first 3 documents in teachers collection in ascending order of experience
+
+db.teachers.find().pretty().sort({experience: 1}).limit(3);
+
+
+12.	Execute any other 2 queries using additional concepts using same the collection.
+
+
+

@@ -1,0 +1,145 @@
+************Indexing***********
+{
+    _id: ObjectId("634d7be6429b791350d5bb42"),
+    name: 'Samruddhi Chauhan',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 11,
+    designation: 'Professor',
+    salary: { basic: 200000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '20-10-2011',
+    area_of_expertise: 'Cyber Security'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb43"),
+    name: 'Avishkar Kakade',
+    qualificaton: 'PhD in Data Science',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 9,
+    designation: 'Professor',
+    salary: { basic: 100000 },
+    date_of_joining: '01-11-2013',
+    area_of_expertise: 'Data science'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb44"),
+    name: 'Vijay Ambure',
+    qualificaton: 'B.E in Electronics Engg.',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 15,
+    designation: 'Professor',
+    salary: { basic: 400000, ta: 40000, da: 50000 },
+    date_of_joining: '20-10-2007',
+    area_of_expertise: 'Electromagnetics'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb45"),
+    name: 'Ashwini Jagtap',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 10,
+    designation: 'Professor',
+    salary: { basic: 100000, hra: 10000 },
+    date_of_joining: '20-10-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb46"),
+    name: 'Girish Potdar',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 20,
+    designation: 'Professor',
+    salary: { basic: 900000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '12-01-2002',
+    area_of_expertise: 'Computational Complexity'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb47"),
+    name: 'Samruddhi Pulate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 10,
+    designation: 'Professor',
+    salary: { basic: 300000, hra: 30000 },
+    date_of_joining: '10-11-2012',
+    area_of_expertise: 'Communication and Networks'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb48"),
+    name: 'Krushna Shewate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 4,
+    designation: 'Professor',
+    salary: { basic: 100000 },
+    date_of_joining: '10-11-2018',
+    area_of_expertise: 'Microcontroller'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb49"),
+    name: 'Rahul Chaudhary',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Professor',
+    salary: { basic: 70000 },
+    date_of_joining: '10-11-2016',
+    area_of_expertise: 'Database Management'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4a"),
+    name: 'Anup Kumar',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Professor',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4b"),
+    name: 'Arvind Kumar',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 8,
+    designation: 'Professor',
+    salary: { basic: 90000 },
+    date_of_joining: '01-04-2014',
+    area_of_expertise: 'Arificial Intelligence'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4c"),
+    name: 'Arvind Sharma',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 6,
+    designation: 'Professor',
+    salary: { basic: 60000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Engineering Graphics'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4d"),
+    name: 'Mohit Mohite',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 2,
+    designation: 'Professor',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2020',
+    area_of_expertise: 'Communication Skills'
+  },
+  {
+    _id: ObjectId("634d7e1824e45f002d792707"),
+    name: 'Rahul Chahar',
+    experience: 10,
+    designation: 'Professor'
+  }
+]
+

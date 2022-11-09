@@ -1,0 +1,1126 @@
+kaldb> db.teachers.insert(
+...     [
+...         {
+...             name:'Samruddhi Chauhan',
+...             qualificaton:'PhD',
+...             deptno:1,
+...             deptname:'Comp',
+...             experience:11,
+...             designation:'Teacher',
+...             salary:{
+...                 basic:200000,
+...                 ta:20000,
+...                 da:40000,
+...                 hra:50000
+...             },
+...             date_of_joining:'20-10-2011',
+...             area_of_expertise:'Cyber Security'
+...         },
+...         {
+...             name:'Avishkar Kakade',
+...             qualificaton:'PhD in Data Science',
+...             deptno:2,
+...             deptname:'IT',
+...             experience:9,
+...             designation:'Teacher',
+...             salary:{
+...                 basic:100000
+...             },
+...             date_of_joining:'01-11-2013',
+...             area_of_expertise:'Data science'
+...         },
+...         {
+...             name:'Vijay Ambure',
+...             qualificaton:'B.E in Electronics Engg.',
+...             deptno:3,
+...             deptname:'EnTC',
+...             experience:15,
+...             designation:'Professor',
+...             salary:{
+...                 basic:400000,
+...                 ta:40000,
+...                 da:50000,
+...             },
+...             date_of_joining:'20-10-2007',
+...             area_of_expertise:'Electromagnetics'
+...         },
+...         {
+...             name:'Ashwini Jagtap',
+...             deptno:1,
+...             deptname:'Comp',
+...             experience:6,
+...             designation:'Teacher',
+...             salary:{
+...                 basic:100000,
+...                 hra:10000
+...             },
+...             date_of_joining:'20-10-2016',
+...             area_of_expertise:'Machine Learning'
+...         },
+...         {
+...             name:'Girish Potdar',
+...             qualificaton:'PhD',
+...             deptno:1,
+...             deptname:'Comp',
+...             experience:20,
+...             designation:'Professor',
+...             salary:{
+...                 basic:900000,
+...                 ta:20000,
+...                 da:40000,
+...                 hra:50000
+...             },
+...             date_of_joining:'12-01-2002',
+...             area_of_expertise:'Computational Complexity'
+...         },
+...         {
+...             name:'Samruddhi Pulate',
+...             deptno:3,
+...             deptname:'EnTC',
+...             experience:10,
+...             designation:'Teacher',
+...             salary:{
+...                 basic:300000,
+...                 hra:30000
+...             },
+...             date_of_joining:'10-11-2012',
+...             area_of_expertise:'Communication and Networks'
+...         },
+...         {
+...             name:'Krushna Shewate',
+...             deptno:3,
+...             deptname:'EnTC',
+...             experience:4,
+...             designation:'Teacher',
+...             salary:{
+...                 basic:100000,
+...             },
+...             date_of_joining:'10-11-2018',
+...             area_of_expertise:'Microcontroller'
+...         },
+...         {
+...             name:'Rahul Chaudhary',
+...             deptno:2,
+...             deptname:'IT',
+...             experience:6,
+...             designation:'Teacher',
+...             salary:{
+...                 basic:70000,
+...             },
+...             date_of_joining:'10-11-2016',
+...             area_of_expertise:'Database Management'
+...         },
+...         {
+...             name:'Anup Kumar',
+...             deptno:2,
+...             deptname:'IT',
+...             experience:6,
+...             designation:'Teacher',
+...             salary:{
+...                 basic:40000,
+...             },
+...             date_of_joining:'01-04-2016',
+...             area_of_expertise:'Machine Learning'
+...         },
+...         {
+...             name:'Arvind Kumar',
+...             deptno:1,
+...             deptname:'Comp',
+...             experience:8,
+...             designation:'Teacher',
+...             salary:{
+...                 basic:90000,
+...             },
+...             date_of_joining:'01-04-2014',
+...             area_of_expertise:'Arificial Intelligence'
+...         },
+...         {
+...             name:'Arvind Sharma',
+...             deptno:0,
+...             deptname:'FE',
+...             experience:6,
+...             designation:'Teacher',
+...             salary:{
+...                 basic:60000,
+...             },
+...             date_of_joining:'01-04-2016',
+...             area_of_expertise:'Engineering Graphics'
+...         },
+...         {
+...             name:'Mohit Mohite',
+...             deptno:0,
+...             deptname:'FE',
+...             experience:2,
+...             designation:'Teacher',
+...             salary:{
+...                 basic:40000,
+...             },
+...             date_of_joining:'01-04-2020',
+...             area_of_expertise:'Communication Skills'
+...         }
+...     ]
+... )
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("634d7be6429b791350d5bb42"),
+    '1': ObjectId("634d7be6429b791350d5bb43"),
+    '2': ObjectId("634d7be6429b791350d5bb44"),
+    '3': ObjectId("634d7be6429b791350d5bb45"),
+    '4': ObjectId("634d7be6429b791350d5bb46"),
+    '5': ObjectId("634d7be6429b791350d5bb47"),
+    '6': ObjectId("634d7be6429b791350d5bb48"),
+    '7': ObjectId("634d7be6429b791350d5bb49"),
+    '8': ObjectId("634d7be6429b791350d5bb4a"),
+    '9': ObjectId("634d7be6429b791350d5bb4b"),
+    '10': ObjectId("634d7be6429b791350d5bb4c"),
+    '11': ObjectId("634d7be6429b791350d5bb4d")
+  }
+}
+kaldb> db.teachers.find().pretty()
+[
+  {
+    _id: ObjectId("634d7be6429b791350d5bb42"),
+    name: 'Samruddhi Chauhan',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 11,
+    designation: 'Teacher',
+    salary: { basic: 200000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '20-10-2011',
+    area_of_expertise: 'Cyber Security'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb43"),
+    name: 'Avishkar Kakade',
+    qualificaton: 'PhD in Data Science',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 9,
+    designation: 'Teacher',
+    salary: { basic: 100000 },
+    date_of_joining: '01-11-2013',
+    area_of_expertise: 'Data science'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb44"),
+    name: 'Vijay Ambure',
+    qualificaton: 'B.E in Electronics Engg.',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 15,
+    designation: 'Professor',
+    salary: { basic: 400000, ta: 40000, da: 50000 },
+    date_of_joining: '20-10-2007',
+    area_of_expertise: 'Electromagnetics'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb45"),
+    name: 'Ashwini Jagtap',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 100000, hra: 10000 },
+    date_of_joining: '20-10-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb46"),
+    name: 'Girish Potdar',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 20,
+    designation: 'Professor',
+    salary: { basic: 900000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '12-01-2002',
+    area_of_expertise: 'Computational Complexity'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb47"),
+    name: 'Samruddhi Pulate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 10,
+    designation: 'Teacher',
+    salary: { basic: 300000, hra: 30000 },
+    date_of_joining: '10-11-2012',
+    area_of_expertise: 'Communication and Networks'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb48"),
+    name: 'Krushna Shewate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 4,
+    designation: 'Teacher',
+    salary: { basic: 100000 },
+    date_of_joining: '10-11-2018',
+    area_of_expertise: 'Microcontroller'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb49"),
+    name: 'Rahul Chaudhary',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 70000 },
+    date_of_joining: '10-11-2016',
+    area_of_expertise: 'Database Management'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4a"),
+    name: 'Anup Kumar',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4b"),
+    name: 'Arvind Kumar',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 8,
+    designation: 'Teacher',
+    salary: { basic: 90000 },
+    date_of_joining: '01-04-2014',
+    area_of_expertise: 'Arificial Intelligence'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4c"),
+    name: 'Arvind Sharma',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 60000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Engineering Graphics'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4d"),
+    name: 'Mohit Mohite',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 2,
+    designation: 'Teacher',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2020',
+    area_of_expertise: 'Communication Skills'
+  }
+]
+kaldb> db.teachers.find(
+...     {deptname:'Comp'}
+... ).pretty()
+[
+  {
+    _id: ObjectId("634d7be6429b791350d5bb42"),
+    name: 'Samruddhi Chauhan',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 11,
+    designation: 'Teacher',
+    salary: { basic: 200000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '20-10-2011',
+    area_of_expertise: 'Cyber Security'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb45"),
+    name: 'Ashwini Jagtap',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 100000, hra: 10000 },
+    date_of_joining: '20-10-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb46"),
+    name: 'Girish Potdar',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 20,
+    designation: 'Professor',
+    salary: { basic: 900000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '12-01-2002',
+    area_of_expertise: 'Computational Complexity'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4b"),
+    name: 'Arvind Kumar',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 8,
+    designation: 'Teacher',
+    salary: { basic: 90000 },
+    date_of_joining: '01-04-2014',
+    area_of_expertise: 'Arificial Intelligence'
+  }
+]
+kaldb> db.teachers.find(
+...     {deptname: {$in: ['Comp', 'IT', 'FE']}}
+... )
+[
+  {
+    _id: ObjectId("634d7be6429b791350d5bb42"),
+    name: 'Samruddhi Chauhan',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 11,
+    designation: 'Teacher',
+    salary: { basic: 200000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '20-10-2011',
+    area_of_expertise: 'Cyber Security'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb43"),
+    name: 'Avishkar Kakade',
+    qualificaton: 'PhD in Data Science',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 9,
+    designation: 'Teacher',
+    salary: { basic: 100000 },
+    date_of_joining: '01-11-2013',
+    area_of_expertise: 'Data science'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb45"),
+    name: 'Ashwini Jagtap',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 100000, hra: 10000 },
+    date_of_joining: '20-10-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb46"),
+    name: 'Girish Potdar',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 20,
+    designation: 'Professor',
+    salary: { basic: 900000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '12-01-2002',
+    area_of_expertise: 'Computational Complexity'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb49"),
+    name: 'Rahul Chaudhary',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 70000 },
+    date_of_joining: '10-11-2016',
+    area_of_expertise: 'Database Management'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4a"),
+    name: 'Anup Kumar',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4b"),
+    name: 'Arvind Kumar',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 8,
+    designation: 'Teacher',
+    salary: { basic: 90000 },
+    date_of_joining: '01-04-2014',
+    area_of_expertise: 'Arificial Intelligence'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4c"),
+    name: 'Arvind Sharma',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 60000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Engineering Graphics'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4d"),
+    name: 'Mohit Mohite',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 2,
+    designation: 'Teacher',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2020',
+    area_of_expertise: 'Communication Skills'
+  }
+]
+kaldb> db.teachers.find(
+...     {
+...         $and:
+...         [
+...             {deptname: {$in: ['Comp', 'IT', 'EnTC']}},
+...             {
+...                 $and:
+...                 [
+...                     {"salary.basic": {$gte : 70000}},
+...                     {"salary.basic": {$lte : 100000}}
+...                 ]
+...             }
+...         ]
+...     }
+... )
+[
+  {
+    _id: ObjectId("634d7be6429b791350d5bb43"),
+    name: 'Avishkar Kakade',
+    qualificaton: 'PhD in Data Science',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 9,
+    designation: 'Teacher',
+    salary: { basic: 100000 },
+    date_of_joining: '01-11-2013',
+    area_of_expertise: 'Data science'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb45"),
+    name: 'Ashwini Jagtap',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 100000, hra: 10000 },
+    date_of_joining: '20-10-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb48"),
+    name: 'Krushna Shewate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 4,
+    designation: 'Teacher',
+    salary: { basic: 100000 },
+    date_of_joining: '10-11-2018',
+    area_of_expertise: 'Microcontroller'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb49"),
+    name: 'Rahul Chaudhary',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 70000 },
+    date_of_joining: '10-11-2016',
+    area_of_expertise: 'Database Management'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4b"),
+    name: 'Arvind Kumar',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 8,
+    designation: 'Teacher',
+    salary: { basic: 90000 },
+    date_of_joining: '01-04-2014',
+    area_of_expertise: 'Arificial Intelligence'
+  }
+]
+kaldb> db.teachers.update(
+...     {
+...         name: "Rahul Chahar"
+...     },
+...     {
+...         $set:{
+...             experience:10
+...         }
+...     }
+... )
+DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+kaldb> db.teachers.updateOne( { name: "Rahul Chahar" }, { $set: { experience: 10 } },{upsert:true})
+{
+  acknowledged: true,
+  insertedId: ObjectId("634d7e1824e45f002d792707"),
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 1
+}
+kaldb> db.teachers.find().pretty()
+[
+  {
+    _id: ObjectId("634d7be6429b791350d5bb42"),
+    name: 'Samruddhi Chauhan',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 11,
+    designation: 'Teacher',
+    salary: { basic: 200000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '20-10-2011',
+    area_of_expertise: 'Cyber Security'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb43"),
+    name: 'Avishkar Kakade',
+    qualificaton: 'PhD in Data Science',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 9,
+    designation: 'Teacher',
+    salary: { basic: 100000 },
+    date_of_joining: '01-11-2013',
+    area_of_expertise: 'Data science'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb44"),
+    name: 'Vijay Ambure',
+    qualificaton: 'B.E in Electronics Engg.',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 15,
+    designation: 'Professor',
+    salary: { basic: 400000, ta: 40000, da: 50000 },
+    date_of_joining: '20-10-2007',
+    area_of_expertise: 'Electromagnetics'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb45"),
+    name: 'Ashwini Jagtap',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 100000, hra: 10000 },
+    date_of_joining: '20-10-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb46"),
+    name: 'Girish Potdar',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 20,
+    designation: 'Professor',
+    salary: { basic: 900000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '12-01-2002',
+    area_of_expertise: 'Computational Complexity'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb47"),
+    name: 'Samruddhi Pulate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 10,
+    designation: 'Teacher',
+    salary: { basic: 300000, hra: 30000 },
+    date_of_joining: '10-11-2012',
+    area_of_expertise: 'Communication and Networks'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb48"),
+    name: 'Krushna Shewate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 4,
+    designation: 'Teacher',
+    salary: { basic: 100000 },
+    date_of_joining: '10-11-2018',
+    area_of_expertise: 'Microcontroller'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb49"),
+    name: 'Rahul Chaudhary',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 70000 },
+    date_of_joining: '10-11-2016',
+    area_of_expertise: 'Database Management'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4a"),
+    name: 'Anup Kumar',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4b"),
+    name: 'Arvind Kumar',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 8,
+    designation: 'Teacher',
+    salary: { basic: 90000 },
+    date_of_joining: '01-04-2014',
+    area_of_expertise: 'Arificial Intelligence'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4c"),
+    name: 'Arvind Sharma',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 60000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Engineering Graphics'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4d"),
+    name: 'Mohit Mohite',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 2,
+    designation: 'Teacher',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2020',
+    area_of_expertise: 'Communication Skills'
+  },
+  {
+    _id: ObjectId("634d7e1824e45f002d792707"),
+    name: 'Rahul Chahar',
+    experience: 10
+  }
+]
+kaldb> db.teachers.update(
+...     {
+...         name: "Ashwini Jagtap"
+...     },
+...     {
+...         $set:{
+...             experience:10
+...         }
+...     },
+...     {
+...         upsert:true
+...     }
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+kaldb> db.teachers.find().pretty()
+[
+  {
+    _id: ObjectId("634d7be6429b791350d5bb42"),
+    name: 'Samruddhi Chauhan',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 11,
+    designation: 'Teacher',
+    salary: { basic: 200000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '20-10-2011',
+    area_of_expertise: 'Cyber Security'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb43"),
+    name: 'Avishkar Kakade',
+    qualificaton: 'PhD in Data Science',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 9,
+    designation: 'Teacher',
+    salary: { basic: 100000 },
+    date_of_joining: '01-11-2013',
+    area_of_expertise: 'Data science'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb44"),
+    name: 'Vijay Ambure',
+    qualificaton: 'B.E in Electronics Engg.',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 15,
+    designation: 'Professor',
+    salary: { basic: 400000, ta: 40000, da: 50000 },
+    date_of_joining: '20-10-2007',
+    area_of_expertise: 'Electromagnetics'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb45"),
+    name: 'Ashwini Jagtap',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 10,
+    designation: 'Teacher',
+    salary: { basic: 100000, hra: 10000 },
+    date_of_joining: '20-10-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb46"),
+    name: 'Girish Potdar',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 20,
+    designation: 'Professor',
+    salary: { basic: 900000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '12-01-2002',
+    area_of_expertise: 'Computational Complexity'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb47"),
+    name: 'Samruddhi Pulate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 10,
+    designation: 'Teacher',
+    salary: { basic: 300000, hra: 30000 },
+    date_of_joining: '10-11-2012',
+    area_of_expertise: 'Communication and Networks'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb48"),
+    name: 'Krushna Shewate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 4,
+    designation: 'Teacher',
+    salary: { basic: 100000 },
+    date_of_joining: '10-11-2018',
+    area_of_expertise: 'Microcontroller'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb49"),
+    name: 'Rahul Chaudhary',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 70000 },
+    date_of_joining: '10-11-2016',
+    area_of_expertise: 'Database Management'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4a"),
+    name: 'Anup Kumar',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4b"),
+    name: 'Arvind Kumar',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 8,
+    designation: 'Teacher',
+    salary: { basic: 90000 },
+    date_of_joining: '01-04-2014',
+    area_of_expertise: 'Arificial Intelligence'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4c"),
+    name: 'Arvind Sharma',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 60000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Engineering Graphics'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4d"),
+    name: 'Mohit Mohite',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 2,
+    designation: 'Teacher',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2020',
+    area_of_expertise: 'Communication Skills'
+  },
+  {
+    _id: ObjectId("634d7e1824e45f002d792707"),
+    name: 'Rahul Chahar',
+    experience: 10
+  }
+]
+kaldb> db.teachers.find({name:"Ashwini Jagtap").pretty()
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:39)
+
+> 1 | db.teachers.find({name:"Ashwini Jagtap").pretty()
+    |                                        ^
+  2 |
+
+kaldb> db.teachers.find({name:"Ashwini Jagtap"}).pretty()
+[
+  {
+    _id: ObjectId("634d7be6429b791350d5bb45"),
+    name: 'Ashwini Jagtap',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 10,
+    designation: 'Teacher',
+    salary: { basic: 100000, hra: 10000 },
+    date_of_joining: '20-10-2016',
+    area_of_expertise: 'Machine Learning'
+  }
+]
+kaldb> db.teachers.find({name:"Rahul Chahar"}).pretty()
+[
+  {
+    _id: ObjectId("634d7e1824e45f002d792707"),
+    name: 'Rahul Chahar',
+    experience: 10
+  }
+]
+kaldb> db.teachers.find(
+...     {},
+...     {
+...         name:1,
+...         experience:1
+...     }
+... ).sort({experience: -1})
+[
+  {
+    _id: ObjectId("634d7be6429b791350d5bb46"),
+    name: 'Girish Potdar',
+    experience: 20
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb44"),
+    name: 'Vijay Ambure',
+    experience: 15
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb42"),
+    name: 'Samruddhi Chauhan',
+    experience: 11
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb45"),
+    name: 'Ashwini Jagtap',
+    experience: 10
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb47"),
+    name: 'Samruddhi Pulate',
+    experience: 10
+  },
+  {
+    _id: ObjectId("634d7e1824e45f002d792707"),
+    name: 'Rahul Chahar',
+    experience: 10
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb43"),
+    name: 'Avishkar Kakade',
+    experience: 9
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4b"),
+    name: 'Arvind Kumar',
+    experience: 8
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb49"),
+    name: 'Rahul Chaudhary',
+    experience: 6
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4a"),
+    name: 'Anup Kumar',
+    experience: 6
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4c"),
+    name: 'Arvind Sharma',
+    experience: 6
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb48"),
+    name: 'Krushna Shewate',
+    experience: 4
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4d"),
+    name: 'Mohit Mohite',
+    experience: 2
+  }
+]
+kaldb> db.teachers.find(
+...     {
+...         experience : {$lt: 10}
+...     }
+... ).pretty()
+[
+  {
+    _id: ObjectId("634d7be6429b791350d5bb43"),
+    name: 'Avishkar Kakade',
+    qualificaton: 'PhD in Data Science',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 9,
+    designation: 'Teacher',
+    salary: { basic: 100000 },
+    date_of_joining: '01-11-2013',
+    area_of_expertise: 'Data science'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb48"),
+    name: 'Krushna Shewate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 4,
+    designation: 'Teacher',
+    salary: { basic: 100000 },
+    date_of_joining: '10-11-2018',
+    area_of_expertise: 'Microcontroller'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb49"),
+    name: 'Rahul Chaudhary',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 70000 },
+    date_of_joining: '10-11-2016',
+    area_of_expertise: 'Database Management'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4a"),
+    name: 'Anup Kumar',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Machine Learning'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4b"),
+    name: 'Arvind Kumar',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 8,
+    designation: 'Teacher',
+    salary: { basic: 90000 },
+    date_of_joining: '01-04-2014',
+    area_of_expertise: 'Arificial Intelligence'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4c"),
+    name: 'Arvind Sharma',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 6,
+    designation: 'Teacher',
+    salary: { basic: 60000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Engineering Graphics'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4d"),
+    name: 'Mohit Mohite',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 2,
+    designation: 'Teacher',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2020',
+    area_of_expertise: 'Communication Skills'
+  }
+]
+kaldb> db.teachers.updateMany(
+...     {experience: {$gte: 1}},
+...     {$set: {designation: "Professor"}}
+... ).pretty()
+Uncaught:
+TypeError: ("﻿db.teachers.u ... r"}}
+)﻿" , (intermediate value)(intermediate value) , (intermediate value)(intermediate value)(intermediate value)).pretty is not a function
+kaldb> db.teachers.updateMany(
+...     {experience: {$gte: 10}},
+...     {$set: {designation: "Professor"}}
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 6,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+kaldb> db.teachers.find().sort({experience: 1}).limit(3)
+[
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4d"),
+    name: 'Mohit Mohite',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 2,
+    designation: 'Professor',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2020',
+    area_of_expertise: 'Communication Skills'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb48"),
+    name: 'Krushna Shewate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 4,
+    designation: 'Professor',
+    salary: { basic: 100000 },
+    date_of_joining: '10-11-2018',
+    area_of_expertise: 'Microcontroller'
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4a"),
+    name: 'Anup Kumar',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Professor',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Machine Learning'
+  }
+]

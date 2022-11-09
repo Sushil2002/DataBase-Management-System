@@ -1,0 +1,100 @@
+
+db.createCollection("student")
+
+db.student.insertMany([
+	{
+		Name:"Om Wanare",
+		Rollno:23,
+		Phy:89,
+		Chem:83,
+		Math:92,
+		SM:98,
+		Marathi:85
+	},
+	{
+		Name:"preti jain",
+		Rollno:32,
+		Phy:92,
+		Chem:96,
+		Math:100,
+		SM:100,
+		Marathi:89
+	},
+	{
+		Name:"Sanket Javar",
+		Rollno:38,
+		Phy:100,
+		Chem:100,
+		Math:100,
+		SM:100,
+		Marathi:36
+	},	
+	{
+		Name:"Vinayak Jamadar",
+		Rollno:37,
+		Phy:90,
+		Chem:87,
+		Math:100,
+		SM:92,
+		Marathi:82
+	},
+	{
+		Name:"akash Kalme",
+		Rollno:43,
+		Phy:90,
+		Chem:90,
+		Math:100,
+		SM:88,
+		Marathi:87
+	},
+	{
+		Name:"xyz",
+		Rollno:1,
+		Phy:35,
+		Chem:35,
+		Math:35,
+		SM:35,
+		Marathi:35
+	}
+])
+
+
+--drop Collcetion
+
+db.student.drop()
+
+--sorting by rollNo
+
+db.student.aggregate([{'$sort':{'Rollno':1}}])
+
+--To print total Marks of each student
+
+db.student.aggregate([
+{
+	$project:{
+		total: { $add: ["$Phy","$Chem","$Math","$SM","$Marathi"]}
+	}
+}
+])
+
+--To print Percentage Marks of each student
+
+db.student.aggregate([
+{
+	$project:{
+		total: { $divide:[$add: ["$Phy","$Chem","$Math","$SM","$Marathi"],5]}
+	}
+}
+])
+
+
+
+
+
+
+
+
+
+
+
+

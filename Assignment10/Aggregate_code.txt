@@ -1,0 +1,261 @@
+db.collection.aggregate([ 
+●	$project - Used to select some specific fields from a collection.
+●	$match - This is a filtering operation and thus this can reduce the amount of documents that are given as input to the next stage.
+●	$group - This does the actual aggregation as discussed above.
+●	$sort - Sorts the documents.   {$limit: 2} 
+●	$skip - With this, it is possible to skip forward in the list of documents for a given amount of documents.
+●	$limit - This limits the amount of documents to look at, by the given number starting from the current positions.
+●	$unwind - This is used to unwind document that are using arrays. When using an array, the data is kind of pre-joined and this operation will be undone with this to have individual documents again. Thus with this stage we will increase the amount of documents for the next stage.
+])
+db.purchase_orders.insertMany(
+[        
+          {product: "toothbrush", total: 4.75, customer: "Mike"},
+          {product: "guitar", total: 199.99, customer: "Tom"},
+          {product: "milk", total: 11.33, customer: "Mike"},
+          {product: "pizza", total: 8.50, customer: "Karen"},
+          {product: "toothbrush", total: 4.75, customer: "Karen"},
+          {product: "pizza", total: 4.75, customer: "Dave"}
+ ]
+);
+   
+            // {$project: {_id: 0,"product":1}},
+Find how much money has been earned by selling the products toothbrushes and pizza:
+
+db.purchase_orders.aggregate(
+[
+	{$match:{product:{$in:['toothbrush','pizza']}}},
+	{$group:{_id:'$product', earnings:{$sum:"$total"}}}
+]
+)
+
+1.	Find out how many toothbrushes were sold
+
+db.purchase_orders.find({product:"toothbrush"}).count();
+
+2.	Find the list of all sold products
+
+db.purchase_orders.distinct("product");
+
+3.	Find the total amount of money spent by each customer
+
+db.purchase_orders.aggregate(
+[
+    {
+        $group : {
+            _id:"$customer",
+            moneyspent:{$sum: "$total"}
+        }
+    }
+]
+)
+
+4.	Find the product sold with least cost
+
+db.purchase_orders.aggregate(
+    [
+        {$project: {_id: 0,"product":1}},
+        {$sort: {total: 1}},
+        {$limit: 1}
+    ]
+);
+
+5.	Find how much has been spent on each product and sort it by price
+
+db.purchase_orders.aggregate(
+[
+    {$group: {_id: "$product", totalMoneySpent: {$sum: "$total"}}},
+    {$sort: {"totalMonwySpent": 1}}
+]
+);
+
+6.	Find how much money each customer has spent on toothbrushes and pizza
+
+db.purchase_orders.aggregate(
+[
+    {$match:{product: {$in: ["pizza", "toothbrush"]}}},
+    {$group:{_id:"$customer", totalMoneySpentOnTnP: {$sum:"$total"}}}
+]
+)
+
+7.	Find the customer who has given highest business for the product toothbrush
+db.purchase_orders.aggregate(
+[
+    {$match:{product:"toothbrush"}},
+    {$group:{_id:"$customer", countOfToothbrush:{$count:{}}}},
+    {$sort:{countOfToothbrush: -1}},
+    {$limit: 1}
+]
+)
+
+// Indexing
+
+db.teachers.save(
+[
+    {
+    _id: ObjectId("634d7be6429b791350d5bb42"),
+    name: 'Samruddhi Chauhan',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 11,
+    designation: 'Professor',
+    salary: { basic: 200000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '20-10-2011',
+    area_of_expertise: 'Cyber Security',
+    empId:101
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb43"),
+    name: 'Avishkar Kakade',
+    qualificaton: 'PhD in Data Science',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 9,
+    designation: 'Professor',
+    salary: { basic: 100000 },
+    date_of_joining: '01-11-2013',
+    area_of_expertise: 'Data science',
+    empId:102
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb44"),
+    name: 'Vijay Ambure',
+    qualificaton: 'B.E in Electronics Engg.',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 15,
+    designation: 'Professor',
+    salary: { basic: 400000, ta: 40000, da: 50000 },
+    date_of_joining: '20-10-2007',
+    area_of_expertise: 'Electromagnetics',
+    empId:103
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb45"),
+    name: 'Ashwini Jagtap',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 10,
+    designation: 'Professor',
+    salary: { basic: 100000, hra: 10000 },
+    date_of_joining: '20-10-2016',
+    area_of_expertise: 'Machine Learning',
+    empId:104
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb46"),
+    name: 'Girish Potdar',
+    qualificaton: 'PhD',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 20,
+    designation: 'Professor',
+    salary: { basic: 900000, ta: 20000, da: 40000, hra: 50000 },
+    date_of_joining: '12-01-2002',
+    area_of_expertise: 'Computational Complexity',
+    empId:105
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb47"),
+    name: 'Samruddhi Pulate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 10,
+    designation: 'Professor',
+    salary: { basic: 300000, hra: 30000 },
+    date_of_joining: '10-11-2012',
+    area_of_expertise: 'Communication and Networks',
+    empId:106
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb48"),
+    name: 'Krushna Shewate',
+    deptno: 3,
+    deptname: 'EnTC',
+    experience: 4,
+    designation: 'Professor',
+    salary: { basic: 100000 },
+    date_of_joining: '10-11-2018',
+    area_of_expertise: 'Microcontroller',
+    empId:107
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb49"),
+    name: 'Rahul Chaudhary',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Professor',
+    salary: { basic: 70000 },
+    date_of_joining: '10-11-2016',
+    area_of_expertise: 'Database Management',
+    empId:108
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4a"),
+    name: 'Anup Kumar',
+    deptno: 2,
+    deptname: 'IT',
+    experience: 6,
+    designation: 'Professor',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Machine Learning',
+    empId:109
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4b"),
+    name: 'Arvind Kumar',
+    deptno: 1,
+    deptname: 'Comp',
+    experience: 8,
+    designation: 'Professor',
+    salary: { basic: 90000 },
+    date_of_joining: '01-04-2014',
+    area_of_expertise: 'Arificial Intelligence',
+    empId:110
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4c"),
+    name: 'Arvind Sharma',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 6,
+    designation: 'Professor',
+    salary: { basic: 60000 },
+    date_of_joining: '01-04-2016',
+    area_of_expertise: 'Engineering Graphics',
+    empId:111
+  },
+  {
+    _id: ObjectId("634d7be6429b791350d5bb4d"),
+    name: 'Mohit Mohite',
+    deptno: 0,
+    deptname: 'FE',
+    experience: 2,
+    designation: 'Professor',
+    salary: { basic: 40000 },
+    date_of_joining: '01-04-2020',
+    area_of_expertise: 'Communication Skills',
+    empId:112
+  },
+  {
+    _id: ObjectId("634d7e1824e45f002d792707"),
+    name: 'Rahul Chahar',
+    experience: 10,
+    designation: 'Professor',
+    empId:113
+  }
+
+]
+)
+
+
+1.	Create single field index on empID
+2.	Drop the indexes
+3.	Create compound index on empID & name
+4.	Drop the indexes
+5.	Create unique index on empID & name
+
+
+

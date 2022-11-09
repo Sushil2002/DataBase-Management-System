@@ -1,0 +1,102 @@
+kaldb> db.purchase_orders.insertMany([
+...           {product: "toothbrush", total: 4.75, customer: "Mike"},
+...           {product: "guitar", total: 199.99, customer: "Tom"},
+...           {product: "milk", total: 11.33, customer: "Mike"},
+...           {product: "pizza", total: 8.50, customer: "Karen"},
+...           {product: "toothbrush", total: 4.75, customer: "Karen"},
+...           {product: "pizza", total: 4.75, customer: "Dave"},
+...           {product: "toothbrush", total: 4.75, customer: "Mike"},
+... ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("634effc1acf8a600abe9c464"),
+    '1': ObjectId("634effc1acf8a600abe9c465"),
+    '2': ObjectId("634effc1acf8a600abe9c466"),
+    '3': ObjectId("634effc1acf8a600abe9c467"),
+    '4': ObjectId("634effc1acf8a600abe9c468"),
+    '5': ObjectId("634effc1acf8a600abe9c469"),
+    '6': ObjectId("634effc1acf8a600abe9c46a")
+  }
+}
+
+kaldb> db.purchase_orders.aggregate(
+... [
+...     {$match:{product:{$in:['toothbrush','pizza']}}},
+...     {$group:{_id:'$product', earnings:{$sum:"$total"}}}
+... ]
+... )
+[
+  { _id: 'toothbrush', earnings: 14.25 },
+  { _id: 'pizza', earnings: 13.25 }
+]
+
+kaldb> db.purchase_orders.find({product:"toothbrush"}).count()
+3
+
+kaldb> db.purchase_orders.distinct("product")
+[ 'guitar', 'milk', 'pizza', 'toothbrush' ]
+
+kaldb> db.purchase_orders.distinct("product")
+[ 'guitar', 'milk', 'pizza', 'toothbrush' ]
+kaldb> db.purchase_orders.aggregate(
+... [
+...     {
+...         $group : {
+...             _id:"$customer",
+...             moneyspent:{$sum: "$total"}
+...         }
+...     }
+... ]
+... )
+[
+  { _id: 'Dave', moneyspent: 4.75 },
+  { _id: 'Karen', moneyspent: 13.25 },
+  { _id: 'Mike', moneyspent: 20.83 },
+  { _id: 'Tom', moneyspent: 199.99 }
+]
+
+kaldb> db.purchase_orders.aggregate(
+...     [
+...         {$project: {_id: 0,"product":1}},
+...         {$sort: {total: 1}},
+...         {$limit: 1}
+...     ]
+... )
+[ { product: 'toothbrush' } ]
+
+kaldb> db.purchase_orders.aggregate(
+... [
+...     {$group: {_id: "$product", totalMoneySpent: {$sum: "$total"}}},
+...     {$sort: {"totalMoneySpent": 1}}
+... ]
+... )
+[
+  { _id: 'milk', totalMoneySpent: 11.33 },
+  { _id: 'pizza', totalMoneySpent: 13.25 },
+  { _id: 'toothbrush', totalMoneySpent: 14.25 },
+  { _id: 'guitar', totalMoneySpent: 199.99 }
+]
+
+kaldb> db.purchase_orders.aggregate(
+... [
+...     {$match:{product: {$in: ["pizza", "toothbrush"]}}},
+...     {$group:{_id:"$customer", totalMoneySpentOnTnP: {$sum:"$total"}}}
+... ]
+... )
+[
+  { _id: 'Mike', totalMoneySpentOnTnP: 9.5 },
+  { _id: 'Karen', totalMoneySpentOnTnP: 13.25 },
+  { _id: 'Dave', totalMoneySpentOnTnP: 4.75 }
+]
+
+kaldb> db.purchase_orders.aggregate(
+... [
+...     {$match:{product:"toothbrush"}},
+...     {$group:{_id:"$customer", countOfToothbrush:{$count:{}}}},
+...     {$sort:{countOfToothbrush: -1}},
+...     {$limit: 1}
+... ]
+... )
+[ { _id: 'Mike', countOfToothbrush: 2 } ]
+
