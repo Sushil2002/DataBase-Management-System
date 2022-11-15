@@ -41,6 +41,13 @@ BEGIN
 	DECLARE date_of_issue date;
 	DECLARE days int;
 	DECLARE fine int ;
+	
+	DECLARE EXIT HANDLER FOR SQLWARNING
+	BEGIN
+		ROLLBACK;
+		select 'Undefine Value' as Message;
+	END;
+	
 SELECT DOI into date_of_issue from Borrower where Borrower.rollno=rollno and Borrower.bookname=bookname;
 	SET days = DATEDIFF(CURDATE(),date_of_issue);
 
