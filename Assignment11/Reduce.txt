@@ -1,0 +1,45 @@
+db.createCollection('Student');
+db.Student.insertOne(
+    { name :"Akshay",
+    class :"TE1",
+    branch :"Comp" }
+) db.Student.insertMany(
+    [
+    {
+        name:"Sushil",
+        class:"SE1",
+        branch:"Comp"
+    },{
+        name:"Manish",
+    class:"TE4",
+    branch:"Comp"
+    }
+    ,{
+        name:"Akshay",
+    class:"SE4",
+    branch:"ENTC"
+    },{
+        name:"Gaurav",
+    class:"TE9",
+    branch:"IT"
+    },{
+        name:"Mandar",
+    class:"TE8",
+    branch:"IT"
+    },{
+        name:"Swayam",
+    class:"SE4",
+    branch:"Comp"
+    }
+]
+)
+
+-- Mapreduce->1.Mapper 2.Reduce
+
+var map1=function(){emit(this.class,1)};
+
+var map2=function(key,value){return Array.sum(value)};
+
+db.Student.mapReduce(map1,map2,{query:{branch:"Comp"},out:"Result"});
+
+db.Result.find()

@@ -1,25 +1,14 @@
-use dbmslab;
 create table dept (dept_id INT PRIMARY KEY, dname varchar(20), dlocation varchar(20));
 create table employee (emp_id int primary key, dept_id int, foreign key(dept_id) references dept(dept_id) on delete cascade, fname varchar(20), lname varchar(20), designation varchar(20), salary int, join_date date);
 create table project (proj_id int primary key, dept_id int, foreign key(dept_id) references dept(dept_id) on delete cascade, pname varchar(20), plocation varchar(20), pcost int, pyear int);
 
--- To delete tables
--- drop table dept;
--- drop table employee;
--- drop table project;
-
--- 1. Insert at least 10 records in the Employee table and insert other tables accordingly.
-
+-- Insert at least 10 records in the Employee table and insert other tables accordingly.
 insert into dept values(1, 'Computer', 'Pune');
 insert into dept values(2, 'IT', 'Pune');
 insert into dept values(3, 'Computer', 'Mumbai');
 insert into dept values(4, 'IT', 'Mumbai');
 insert into dept values(5, 'Production', 'Nagpur');
 insert into dept values(6, 'Production', 'Nagpur');
-
--- I inserted all 'dlocation's as 'Pune'. So these commands were used to change it
--- update dept set dlocation='Mumbai' where (dept_id=3 or dept_id=4);
--- update dept set dlocation='Nagpur' where (dept_id=5 or dept_id=6);
 
 insert into employee values (1, 1, 'Shreyash', 'Halge', 'Team Lead', 100000, '2021-07-26');
 insert into employee values (2, 6, 'Pranav', 'Unkal', 'Project Manager', 150000, '2020-04-17');
@@ -40,41 +29,36 @@ insert into project values (4, 3, 'Healthcare', 'Pune', 9000000, 2006);
 insert into project values (5, 4, 'Stock Predictor', 'Nagpur', 1000000, 2012);
 insert into project values (6, 2, 'Messaging App', 'Bengaluru', 7000000, 2007);
 
--- select * from employee;
--- select * from project;
--- select * from dept;
+--1. Find Employee details and Department details using NATURAL JOIN.
+select * from employee natural join dept;
 
--- 2. Display all Employee details with Department ‘Computer’ and ‘IT’ and Employee first name starting with 'p' or 'h'.
-select * from employee left join dept on employee.dept_id=dept.dept_id where 
-(dept.dname='Computer' or dept.dname='IT')
-and
-(emp_id in (select emp_id from employee where fname like 'H%' or fname like 'P%')); 
+--2. Find the fname,designation,dlocation,JoinDate
+select fname, designation, dlocation, join_date from employee natural join dept;
 
--- 3. Lists the number of different Employee Positions. 
-select distinct designation from employee;
+--3. Find the Employee details ,Proj_id,Project cost who does not have Project location as ‘Hyderabad’.
+select employee.*, proj_id, pcost from employee natural join project where plocation!='Pune';
 
--- 4. Give 10% increase in Salary of the Employee whose joindate before 2015. 
-update employee
-set salary=salary+salary*0.10
-where (YEAR(join_date) <= 2015 and emp_id>0);
+--4. Find Department Name ,employee name, designation for which project year is 2020,
+select dname, fname, designation from employee natural join project natural join dept where pyear=2022;
 
--- 5. Delete all the department details having location as ‘mumbai’. 
-delete from dept where (dlocation='Mumbai' and dept_id>0);
+--5. Display designation,Dept_id which Project cost is greater than 30000
+select designation, dept_id from employee natural join project where pcost>5000000;
 
--- 6. Find the names of Projects with location ‘pune’ . 
-select * from project where plocation='Pune';
+--6. Find the names of all the Projects that started in the year 2015.
+select pname from project where pyear=2015;
 
--- 7. Find the project having cost in between 100000 to 500000. 
-select * from project where pcost between 100000 and 500000;
+--7. List the dname having number of employees are 10
+select dept_id, count(emp_id) as strength from employee group by dept_id having strength>2;
 
--- 8. Find the project having maximum price and find average Project cost.
-select * from project where pcost=(select max(pcost) from project);
+--8. Display the total number of employee who have joined any project before 2009
+select count(*) from employee natural join project where pyear<2009;
 
--- 9. Display all employees with Emp _id and Emp name in descending order.
-select * from employee order by fname desc;
+--9. Create a view showing the employee and Department details. (complex view)
+create view emp_dept as (select * from employee natural join dept);
 
--- 10. Display Proj_name,Plocation ,Pcost of all project started in 2004,2005,2007 
-select pname, plocation, pcost from project where pyear=2004 or pyear=2005 or pyear=2007;
-
--- 11. Calculate experience of employees
-select fname, timestampdiff(day, join_date, CURDATE()) as experience from employee;
+--10. Perform Manipulation on simple view-Insert, update, delete, drop view.
+create view emp_sal as select emp_id, fname, lname, dept_id, salary from employee;
+insert into emp_sal values('13', 'Jayesh', 'Kulkarni', 2, 500000);
+update emp_sal set salary=50000 where emp_id=13;
+delete from emp_sal where emp_id=13;
+drop view emp_sal;

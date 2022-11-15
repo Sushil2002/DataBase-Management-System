@@ -1,0 +1,122 @@
+
+test> db.createCollection('MAP');
+{ ok: 1 }
+test>
+
+test> db.MAP.insertOne(
+...     { name :"Akshay",
+...     class :"TE1",
+...     branch :"Comp" }
+... ) db.Student.insertMany(
+Uncaught:
+SyntaxError: Missing semicolon. (5:1)
+
+  3 |     class :"TE1",
+  4 |     branch :"Comp" }
+> 5 | ) db.Student.insertMany(
+    |  ^
+  6 |
+
+test>     [
+...     {
+...         name:"Sushil",
+...         class:"SE1",
+...         branch:"Comp"
+...     },{
+...         name:"Manish",
+...     class:"TE4",
+...     branch:"Comp"
+...     }
+...     ,{
+...         name:"Akshay",
+...     class:"SE4",
+...     branch:"ENTC"
+...     },{
+...         name:"Gaurav",
+...     class:"TE9",
+...     branch:"IT"
+...     },{
+...         name:"Mandar",
+...     class:"TE8",
+...     branch:"IT"
+...     },{
+...         name:"Swayam",
+...     class:"SE4",
+...     branch:"Comp"
+...     }
+... ]
+[
+  { name: 'Sushil', class: 'SE1', branch: 'Comp' },
+  { name: 'Manish', class: 'TE4', branch: 'Comp' },
+  { name: 'Akshay', class: 'SE4', branch: 'ENTC' },
+  { name: 'Gaurav', class: 'TE9', branch: 'IT' },
+  { name: 'Mandar', class: 'TE8', branch: 'IT' },
+  { name: 'Swayam', class: 'SE4', branch: 'Comp' }
+]
+test> db.MAP.insertOne(
+...     { name :"Akshay",
+...     class :"TE1",
+...     branch :"Comp" }
+... );
+{
+  acknowledged: true,
+  insertedId: ObjectId("637370b38b901313ba6d57f7")
+}
+test> db.Student.insertMany(
+...     [
+...     {
+...         name:"Sushil",
+...         class:"SE1",
+...         branch:"Comp"
+...     },{
+...         name:"Manish",
+...     class:"TE4",
+...     branch:"Comp"
+...     }
+...     ,{
+...         name:"Akshay",
+...     class:"SE4",
+...     branch:"ENTC"
+...     },{
+...         name:"Gaurav",
+...     class:"TE9",
+...     branch:"IT"
+...     },{
+...         name:"Mandar",
+...     class:"TE8",
+...     branch:"IT"
+...     },{
+...         name:"Swayam",
+...     class:"SE4",
+...     branch:"Comp"
+...     }
+... ]
+... );
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("637370c18b901313ba6d57f8"),
+    '1': ObjectId("637370c18b901313ba6d57f9"),
+    '2': ObjectId("637370c18b901313ba6d57fa"),
+    '3': ObjectId("637370c18b901313ba6d57fb"),
+    '4': ObjectId("637370c18b901313ba6d57fc"),
+    '5': ObjectId("637370c18b901313ba6d57fd")
+  }
+}
+test> var map1=function(){emit(this.class,1)};
+
+test>
+
+test> var map2=function(key,value){return Array.sum(value)};
+
+test>
+
+test> db.Student.mapReduce(map1,map2,{query:{branch:"Comp"},out:"Result"});
+{ result: 'Result', ok: 1 }
+test> db.Result.find()
+[
+  { _id: 'SE1', value: 1 },
+  { _id: 'TE4', value: 1 },
+  { _id: 'SE4', value: 1 }
+]
+test>
